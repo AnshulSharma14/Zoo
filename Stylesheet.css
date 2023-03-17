@@ -1,0 +1,81 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+header{
+  margin: 0rem;
+}
+/* body{
+    background-color:#8a4af2;
+} */
+
+.nav-bar-logo{
+    height: 2.5rem;
+    padding-left: 2rem;
+}
+ul{
+    list-style: none;
+}
+.nav-list{
+    display: flex;
+    align-content: center;
+    gap:2rem;
+    float:right;
+    padding-right: 1rem;
+}
+.btn{
+    border-radius: 5rem;
+}
+.form{
+    max-width: 100%;
+    width: 500px;
+    margin:2rem auto;
+    background-color: #fff;
+    padding:3rem;
+    border:2px solid;
+    box-shadow: 4px 4px 4px 4px rgb(0, 0, 255, .2);
+
+}
+.form:hover{
+    box-shadow: 12px 12px 2px 1px rgb(0, 0, 255, .2);
+    transition: .5s ease-in-out;
+}
+.btncs{
+    align-self: center;
+    align-content: center;
+    height: 40px;
+    width:400px;
+    left: 50%;
+    text-transform: uppercase;
+    
+}
+.title{
+  text-align: center;
+}
+.dashboard{
+    margin-top: 3rem;
+}
+.card{
+ width: 18rem;
+}
+.dashboard-img{
+    height: 15rem;
+}
+.goback{
+    height:40px;
+    width:400px;
+    background-color: #2a79f8;
+    color: #fff;
+    border-radius: 5rem;
+    padding: .5rem 6rem;
+    text-align: center;
+}
+.goback:hover{
+    cursor: pointer;
+}
+.button {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+  }
