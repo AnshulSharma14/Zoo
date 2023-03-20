@@ -1,4 +1,6 @@
 <?php
+session_start();
+session_unset();
 include('Header.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('config.php');
@@ -13,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_query($conn, $sql)) {
         session_start();
         $_SESSION["user_name"] = $email;
-        header("Location:http://localhost:8090/Projects/DashBoard.php");
+        header("Location:DashBoard.php");
         exit();
     } else {
 

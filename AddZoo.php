@@ -1,8 +1,16 @@
 <?php
 include('config.php');
-include('Header.php');
-$sql = "select * from Users";
-$result = $conn->query($sql);
+if($_SERVER['REQUEST_METHOD']==='POST')
+{
+    $name=$_POST['name'];
+    $location=$_POST['location'];
+    if(!empty($name)&&!empty($location))
+    {
+        $query="INSERT INTO `zoo`(`Name`,`Location`) 
+        VALUES ('$name','$location')";
+        $excute=$conn->query($query);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,23 +26,20 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-    <div class="container UserTable mt-5">
-        <div class="row">
-            <div class="center">
                 <h1 class="text-primary text-centered">
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr class="table-primary">
                                 <th>Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
+                                <th>Name</th>
+                                <th>Location</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
+                             $query_return="SELECT * FROM `zoo`";
+                             $result=$conn->query($query_return);
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     ?>
@@ -43,19 +48,13 @@ $result = $conn->query($sql);
                                             <?php echo $row['Id']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $row['First_Name']; ?>
+                                            <?php echo $row['Name']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $row['Last_Name']; ?>
+                                            <?php echo $row['Location']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $row['Email']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $row['Phone_Number']; ?>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-info" href="UpdateUsers.php?id=<?php echo $row['Id']; ?>">Edit
+                                            <a class="btn btn-info" href="UpdateZoo.php?id=<?php echo $row['Id']; ?>">Edit
                                             
                                         </td>
                                     </tr>
@@ -64,9 +63,5 @@ $result = $conn->query($sql);
                             }
                             ?>
                         </tbody>
-            </div>
-        </div>
-    </div>
 </body>
-
 </html>

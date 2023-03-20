@@ -1,4 +1,6 @@
 <?php
+session_start();
+session_unset();
 include('config.php');
 include('Header.php');
 if (isset($_POST['Login'])) {
@@ -10,10 +12,10 @@ if (isset($_POST['Login'])) {
     if ($total == 1) {
         session_start();
         $_SESSION["user_name"] = $Email;
-        header("Location:http://localhost:8090/Projects/DashBoard.php");
+        header("Location:DashBoard.php");
         exit();
     } else {
-        header("Location:http://localhost:8090/Projects/index.php");
+        header("Location:index.php");
         exit();
     }
 }

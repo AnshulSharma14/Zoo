@@ -4,10 +4,17 @@ include('config.php');
 session_start();
 $user_profile = $_SESSION["user_name"];
 if (!isset($_SESSION['user_name'])) {
-    header("Location:http://localhost:8090/Projects/index.php");
+    header("Location:http://index.php");
 } else {
-    // header("Location:http://localhost:8090/Projects/DashBoard.php");
-    // exit();
+
+    function registredMemberCount ($conn) 
+    {
+        $query="SELECT COUNT(Id) FROM `users`";
+        $usr_count=$conn->query($query);
+        $rows = mysqli_fetch_row($usr_count);
+        return $rows[0];
+    }
+    
 }
 ?>
 <!DOCTYPE html>
@@ -35,9 +42,9 @@ if (!isset($_SESSION['user_name'])) {
                 <div class="card">
                     <img src="./images/users.jpeg" class="card-img-top dashboard-img" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Total-Users</h5>
-                        <p class="card-text">1</p>
-                        <a href="users.php" class="btn btn-primary">View Details</a>
+                        <h5 class="card-title text-center">Total-Users</h5>
+                        <p class="card-text text-center"><?php echo registredMemberCount($conn); ?></p>
+                        <a href="users.php" class="btn btn-primary w-100">View Details</a>
                     </div>
                 </div>
             </div>
@@ -45,19 +52,19 @@ if (!isset($_SESSION['user_name'])) {
                 <div class="card">
                     <img src="./images/animal.jpeg" class="card-img-top dashboard-img" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Total Animals</h5>
-                        <p class="card-text">1</p>
-                        <a href="Users.php" class="btn btn-primary">View Details</a>
+                        <h5 class="card-title text-center">Total Animals</h5>
+                        <p class="card-text text-center">1</p>
+                        <a href="animals.php" class="btn btn-primary w-100">View Details</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="card">
-                    <img src="./images/download.jpeg" class="card-img-top dashboard-img" alt="...">
+                    <img src="./images/774518.jpg" class="card-img-top dashboard-img" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Total Zoo</h5>
-                        <p class="card-text">1</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
+                        <h5 class="card-title text-center">Total Zoo</h5>
+                        <p class="card-text text-center">1</p>
+                        <a href="Zoo.php" class="btn btn-primary w-100">View Details</a>
                     </div>
                 </div>
             </div>
