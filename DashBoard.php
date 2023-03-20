@@ -7,14 +7,21 @@ if (!isset($_SESSION['user_name'])) {
     header("Location:http://index.php");
 } else {
 
-    function registredMemberCount ($conn) 
+    function registredMemberCount($conn)
     {
-        $query="SELECT COUNT(Id) FROM `users`";
-        $usr_count=$conn->query($query);
+        $query = "SELECT COUNT(Id) FROM `users`";
+        $usr_count = $conn->query($query);
         $rows = mysqli_fetch_row($usr_count);
         return $rows[0];
     }
-    
+    function ZooCount($conn)
+    {
+        $query = "SELECT COUNT(Id) FROM `Zoo`";
+        $zoo_count = $conn->query($query);
+        $rows_zoo = mysqli_fetch_row($zoo_count);
+        return $rows_zoo[0];
+    }
+
 }
 ?>
 <!DOCTYPE html>
@@ -43,7 +50,9 @@ if (!isset($_SESSION['user_name'])) {
                     <img src="./images/users.jpeg" class="card-img-top dashboard-img" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">Total-Users</h5>
-                        <p class="card-text text-center"><?php echo registredMemberCount($conn); ?></p>
+                        <p class="card-text text-center">
+                            <?php echo registredMemberCount($conn); ?>
+                        </p>
                         <a href="users.php" class="btn btn-primary w-100">View Details</a>
                     </div>
                 </div>
@@ -60,10 +69,12 @@ if (!isset($_SESSION['user_name'])) {
             </div>
             <div class="col-lg-4">
                 <div class="card">
-                    <img src="./images/774518.jpg" class="card-img-top dashboard-img" alt="...">
+                    <img src="./images/lion.png" class="card-img-top dashboard-img" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Zoo</h5>
-                        <p class="card-text text-center">1</p>
+                        <p class="card-text text-center">
+                            <?php echo ZooCount($conn); ?>
+                        </p>
                         <a href="Zoo.php" class="btn btn-primary w-100">View Details</a>
                     </div>
                 </div>
