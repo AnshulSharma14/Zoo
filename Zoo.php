@@ -41,8 +41,10 @@ include('Header.php');
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" onclick="AddRecords()" id="btnsub">Save
+                        <button type="button" class="btn btn-secondary clear" onclick="clearForm()"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="AddRecords()"
+                            id="btnsub">Save
                             Zoo</button>
                     </div>
                 </form>
@@ -77,7 +79,12 @@ include('Header.php');
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <script>
-
+        //to clear form
+        function clearForm() {
+            document.getElementById("saveZoo").reset();
+            var heading = document.getElementById('btnsub');
+            heading.innerHTML = 'Add Zoo';
+        }
         //function to bring table in initial load
         function bring() {
             var xhr = new XMLHttpRequest();
@@ -99,6 +106,8 @@ include('Header.php');
             var name = document.getElementById("name").value;
             var location = document.getElementById("location").value;
             var id = document.getElementById("Id").value;
+
+
             //for adding record
             if (id == null) {
                 console.log('adding');

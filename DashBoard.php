@@ -21,6 +21,13 @@ if (!isset($_SESSION['user_name'])) {
         $rows_zoo = mysqli_fetch_row($zoo_count);
         return $rows_zoo[0];
     }
+    function AnimalsCount($conn)
+    {
+        $query = "SELECT COUNT(Id) FROM `Animals`";
+        $animal_count = $conn->query($query);
+        $rows = mysqli_fetch_row($animal_count);
+        return $rows[0];
+    }
 
 }
 ?>
@@ -62,7 +69,9 @@ if (!isset($_SESSION['user_name'])) {
                     <img src="./images/animal.jpeg" class="card-img-top dashboard-img" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Animals</h5>
-                        <p class="card-text text-center">1</p>
+                        <p class="card-text text-center">
+                            <?php echo AnimalsCount($conn); ?>
+                        </p>
                         <a href="animals.php" class="btn btn-primary w-100">View Details</a>
                     </div>
                 </div>
