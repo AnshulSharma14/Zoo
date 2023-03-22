@@ -5,6 +5,21 @@
         </div>
         <div class="nav-bar-content">
             <ul class="nav-list">
+                <li class="text-white">
+            <?php
+            session_start();
+            if (isset($_SESSION['user_name'])) {
+            $user_profile = $_SESSION["user_name"];
+            echo "Welcome ". $user_profile ;
+            ?>
+            
+            </li>
+            <li class="text-white d-flex float-end">
+            <a href="logout.php" class="btn btn-danger">logout</a>
+            </li>
+            <?php
+            }
+            ?>
             </ul>
         </div>
     </nav>

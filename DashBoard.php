@@ -1,7 +1,6 @@
 <?php
 include('Header.php');
 include('config.php');
-session_start();
 $user_profile = $_SESSION["user_name"];
 if (!isset($_SESSION['user_name'])) {
     header("Location:http://index.php");
@@ -23,7 +22,7 @@ if (!isset($_SESSION['user_name'])) {
     }
     function AnimalsCount($conn)
     {
-        $query = "SELECT COUNT(Id) FROM `Animals`";
+        $query = "SELECT COUNT(Id) FROM `Animals` WHERE activity_status=1";
         $animal_count = $conn->query($query);
         $rows = mysqli_fetch_row($animal_count);
         return $rows[0];
@@ -46,10 +45,6 @@ if (!isset($_SESSION['user_name'])) {
 </head>
 
 <body>
-    <?php
-    echo $user_profile;
-    ?>
-    <a href="logout.php">logout</a>
     <div class="container dashboard">
         <div class="row">
             <div class="col-lg-4">

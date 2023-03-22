@@ -1,8 +1,6 @@
 <?php
 include('config.php');
 include('Header.php');
-session_start();
-$user_profile = $_SESSION["user_name"];
 if (!isset($_SESSION['user_name'])) {
   header("Location:http://index.php");
 }
@@ -37,14 +35,14 @@ if (!isset($_SESSION['user_name'])) {
             </div>
             <div class="mb-3">
               <label for="Gender" name="Gender">Gender</label>
-              <input type="radio" id="Gender" name="Gender" value="male">
+              <input type="radio" id="Gender1" name="Gender" value="male">
               <label for="Male">Male</label>
-              <input type="radio" id="Gender" name="Gender" value="female">
+              <input type="radio" id="Gender2" name="Gender" value="female">
               <label for="Female">Female</label>
             </div>
             <div class="mb-3">
               <label for="">Select Zoo</label>
-              <select name="Zoo_name" class="form-control">
+              <select name="Zoo_name" id="Zoo_name"class="form-control">
                 <option value="Select">select Zoo</option>
                 <?php
                 $query = "SELECT Id,Name FROM zoo";
@@ -61,7 +59,7 @@ if (!isset($_SESSION['user_name'])) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" onclick="insertAnimals()">Save animal</button>
+            <button type="submit" class="btn btn-primary" id="bt" data-bs-dismiss="modal" onclick="insertAnimals()">Save animal</button>
           </div>
         </form>
       </div>
@@ -107,8 +105,9 @@ if (!isset($_SESSION['user_name'])) {
         event.preventDefault();
       });
       var name = document.getElementById("name").value;
-      var Gender = document.getElementById("Gender").value;
+     // var Gender = document.getElementById("Gender").value;
       var id = document.getElementById("Id").value;
+      if(id==null){
       //var Zoo_id=document.getElementById("").value;
       console.log('adding');
       var xhr = new XMLHttpRequest();
@@ -122,7 +121,23 @@ if (!isset($_SESSION['user_name'])) {
       };
       xhr.send(data);
     }
-    //function to delete data
+    else
+    {
+      console.log("updating");
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'animals_crud.php');
+      var data = new FormData(formElement);
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("data").innerHTML = this.responseText;
+        }
+      };
+      console.log(data);
+      xhr.send(data);
+    }
+  }
+
+    //function to delete data 
 
     function deleteRecords(id) {
       var data = id;
@@ -138,7 +153,7 @@ if (!isset($_SESSION['user_name'])) {
       };
       xhr.send("Id=" + data)
     }
-    //function to fetch record
+    //function to fetch record during edit
     function updateRecord(id) {
       console.log(id);
       var data = id.slice(1);
@@ -154,9 +169,22 @@ if (!isset($_SESSION['user_name'])) {
           var gender = arr[2];
           var Zoo_id = arr[3];
           var Zoo_name = arr[4];
-          // document.getElementById("name").value = name;
-          // document.getElementById("location").value = location;
-          // document.getElementById("Id").value = id;
+          console.log(arr);
+          document.getElementById("name").value = animal_name;
+          if(document.getElementById("Gender1").value== gender)
+          {
+            radiobtn=document.getElementById("Gender1");
+            radiobtn.checked=true;
+          }
+          else
+          {
+            radiobtn=document.getElementById("Gender2");
+            radiobtn.checked=true;
+          }
+          document.getElementById("Id").value = id;
+          document.getElementById("Zoo_name").value = Zoo_id;
+          var heading=document.getElementById("bt");
+          heading.innerHTML='Update'
         }
       };
       xhr.send("id=" + data);

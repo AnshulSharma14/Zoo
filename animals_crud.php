@@ -1,8 +1,7 @@
 <?php
 include('config.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    if ((!empty($_POST['name'])) && (!empty($_POST['Gender'])) && (!empty($_POST['Zoo_name']))) {
+    if ((!empty($_POST['name'])) && (!empty($_POST['Gender'])) && (!empty($_POST['Zoo_name']))&& (empty($_POST['id']))) {
         $name = $_POST['name'];
         $gender = $_POST['Gender'];
         $Zoo_id = $_POST['Zoo_name'];
@@ -14,7 +13,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $highest_id;
         $insert_map = "INSERT INTO `Animal_Zoo`(`Zoo_Id`, `Animal_Id`) VALUES ('$Zoo_id','$highest_id')";
         $conn->query($insert_map);
-    } else {
+    }else if((!empty($_POST['name'])) && (!empty($_POST['Gender'])) && (!empty($_POST['Zoo_name'])) && (!empty($_POST['id'])))
+    {   echo("Inside");
+        $Id=$_POST['id'];
+        $name = $_POST['name'];
+        $gender = $_POST['Gender'];
+        $Zoo_id = $_POST['Zoo_name'];
+        $sql = "UPDATE `Animals` SET
+         Name='$name',
+         Gender='$gender'
+         WHERE Id='$Id'";
+        $result = $conn->query($sql);
+        $insert_map = "UPDATE `Animal_Zoo`
+        SET
+        Zoo_Id='$Zoo_id'
+        WHERE
+        Animal_Id='$Id'";
+         $conn->query($insert_map);
+    }
+    else {
         if (!empty($_POST['Id'])) {
             $id = $_POST['Id'];
             $sql = "UPDATE `Animals` SET activity_status=0
